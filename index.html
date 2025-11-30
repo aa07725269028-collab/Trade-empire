@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إمبراطورية التجارة العالمية - Global Trade Empire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- الشريط العلوي -->
+    <nav class="glass-effect p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🏰 إمبراطورية التجارة العالمية</h1>
+            <div class="flex space-x-4 space-x-reverse">
+                <button onclick="changeLanguage('ar')" class="px-3 py-1 rounded bg-white bg-opacity-20">العربية</button>
+                <button onclick="changeLanguage('en')" class="px-3 py-1 rounded bg-white bg-opacity-20">English</button>
+                <button onclick="changeLanguage('zh')" class="px-3 py-1 rounded bg-white bg-opacity-20">中文</button>
+                <button onclick="changeLanguage('hi')" class="px-3 py-1 rounded bg-white bg-opacity-20">हिन्दी</button>
+                <button onclick="changeLanguage('es')" class="px-3 py-1 rounded bg-white bg-opacity-20">Español</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container mx-auto p-6">
+        <!-- لوحة التحكم -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- روبوت الصياد -->
+            <div class="glass-effect rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">🤖 روبوت الصياد</h3>
+                <p id="hunter-status">🔍 يبحث عن المنتجات النادرة...</p>
+                <button onclick="startHunter()" class="mt-4 bg-green-500 px-4 py-2 rounded">تشغيل</button>
+            </div>
+
+            <!-- روبوت المفاوض -->
+            <div class="glass-effect rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">💬 روبوت المفاوض</h3>
+                <p id="negotiator-status">🔄 جاهز للتفاوض...</p>
+                <button onclick="startNegotiator()" class="mt-4 bg-green-500 px-4 py-2 rounded">تشغيل</button>
+            </div>
+
+            <!-- روبوت المحلل -->
+            <div class="glass-effect rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">📊 روبوت المحلل</h3>
+                <p id="analyst-status">📈 يحلل اتجاهات السوق...</p>
+                <button onclick="startAnalyst()" class="mt-4 bg-green-500 px-4 py-2 rounded">تشغيل</button>
+            </div>
+
+            <!-- روبوت المسوق -->
+            <div class="glass-effect rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">🎯 روبوت المسوق</h3>
+                <p id="marketer-status">🚀 يستهدف العملاء...</p>
+                <button onclick="startMarketer()" class="mt-4 bg-green-500 px-4 py-2 rounded">تشغيل</button>
+            </div>
+        </div>
+
+        <!-- المحفظة الإلكترونية -->
+        <div class="glass-effect rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">💰 المحفظة الإلكترونية</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="text-center">
+                    <p class="text-sm">الرصيد الحالي</p>
+                    <p id="balance" class="text-2xl font-bold">$10,000</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm">الأرباح اليوم</p>
+                    <p id="daily-profit" class="text-2xl font-bold text-green-400">+$350</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm">إجمالي الأرباح</p>
+                    <p id="total-profit" class="text-2xl font-bold">$2,450</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm">عدد الصفقات</p>
+                    <p id="transactions-count" class="text-2xl font-bold">47</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm">معدل النجاح</p>
+                    <p id="success-rate" class="text-2xl font-bold text-green-400">94%</p>
+                </div>
+            </div>
+            <div class="mt-4 flex space-x-4 space-x-reverse">
+                <button onclick="depositMoney()" class="bg-blue-500 px-4 py-2 rounded">إيداع</button>
+                <button onclick="withdrawMoney()" class="bg-red-500 px-4 py-2 rounded">سحب</button>
+                <button onclick="investMoney()" class="bg-green-500 px-4 py-2 rounded">استثمار</button>
+            </div>
+        </div>
+
+        <!-- نظام الشحن الدولي -->
+        <div class="glass-effect rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">🚚 نظام الشحن الدولي</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-white bg-opacity-10 rounded">
+                    <p class="font-bold">DHL</p>
+                    <p class="text-sm">شحن سريع عالمي</p>
+                </div>
+                <div class="text-center p-4 bg-white bg-opacity-10 rounded">
+                    <p class="font-bold">FedEx</p>
+                    <p class="text-sm">توصيل لجميع الدول</p>
+                </div>
+                <div class="text-center p-4 bg-white bg-opacity-10 rounded">
+                    <p class="font-bold">UPS</p>
+                    <p class="text-sm">خدمات لوجستية</p>
+                </div>
+                <div class="text-center p-4 bg-white bg-opacity-10 rounded">
+                    <p class="font-bold">Aramex</p>
+                    <p class="text-sm">تغطية شاملة</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // نظام اللغات
+        const translations = {
+            ar: {
+                welcome: "مرحباً بك في إمبراطورية التجارة العالمية",
+                hunter: "روبوت الصياد",
+                negotiator: "روبوت المفاوض",
+                analyst: "روبوت المحلل",
+                marketer: "روبوت المسوق"
+            },
+            en: {
+                welcome: "Welcome to Global Trade Empire",
+                hunter: "Hunter Bot",
+                negotiator: "Negotiator Bot", 
+                analyst: "Analyst Bot",
+                marketer: "Marketer Bot"
+            },
+            zh: {
+                welcome: "欢迎来到全球贸易帝国",
+                hunter: "猎手机器人",
+                negotiator: "谈判机器人",
+                analyst: "分析机器人", 
+                marketer: "营销机器人"
+            },
+            hi: {
+                welcome: "वैश्विक व्यापार साम्राज्य में आपका स्वागत है",
+                hunter: "शिकारी रोबोट",
+                negotiator: "वार्ताकार रोबोट",
+                analyst: "विश्लेषक रोबोट",
+                marketer: "मार्केटर रोबोट"
+            },
+            es: {
+                welcome: "Bienvenido al Imperio del Comercio Global",
+                hunter: "Robot Cazador",
+                negotiator: "Robot Negociador",
+                analyst: "Robot Analista",
+                marketer: "Robot Marketer"
+            }
+        };
+
+        let currentLanguage = 'ar';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            updateTexts();
+        }
+
+        function updateTexts() {
+            document.querySelector('h1').textContent = translations[currentLanguage].welcome;
+            document.querySelectorAll('.glass-effect h3')[0].textContent = 
+                translations[currentLanguage].hunter + ' 🤖';
+            document.querySelectorAll('.glass-effect h3')[1].textContent = 
+                translations[currentLanguage].negotiator + ' 💬';
+            document.querySelectorAll('.glass-effect h3')[2].textContent = 
+                translations[currentLanguage].analyst + ' 📊';
+            document.querySelectorAll('.glass-effect h3')[3].textContent = 
+                translations[currentLanguage].marketer + ' 🎯';
+        }
+
+        // نظام الروبوتات
+        function startHunter() {
+            document.getElementById('hunter-status').innerHTML = 
+                '✅ وجد 15 منتج نادر في الأسواق العالمية';
+        }
+
+        function startNegotiator() {
+            document.getElementById('negotiator-status').innerHTML = 
+                '✅ أتم 8 مفاوضات ناجحة مع الموردين';
+        }
+
+        function startAnalyst() {
+            document.getElementById('analyst-status').innerHTML = 
+                '✅ حلل 200 مؤشر وقدم 12 توصية';
+        }
+
+        function startMarketer() {
+            document.getElementById('marketer-status').innerHTML = 
+                '✅ استهدف 5000 عميل محتمل بنجاح';
+        }
+
+        // النظام المالي
+        function depositMoney() {
+            const balance = document.getElementById('balance');
+            const current = parseInt(balance.textContent.replace('$', '').replace(',', ''));
+            balance.textContent = '$' + (current + 1000).toLocaleString();
+            alert('تم إيداع $1000 بنجاح!');
+        }
+
+        function withdrawMoney() {
+            const balance = document.getElementById('balance');
+            const current = parseInt(balance.textContent.replace('$', '').replace(',', ''));
+            if(current >= 500) {
+                balance.textContent = '$' + (current - 500).toLocaleString();
+                alert('تم سحب $500 بنجاح!');
+            } else {
+                alert('رصيد غير كافي!');
+            }
+        }
+
+        function investMoney() {
+            const dailyProfit = document.getElementById('daily-profit');
+            const current = parseInt(dailyProfit.textContent.replace('+$', '').replace(',', ''));
+            dailyProfit.textContent = '+$' + (current + 50);
+            alert('تم استثمار $500 وسيزيد ربحك اليومي!');
+        }
+
+        // محاكاة بيانات حية
+        setInterval(() => {
+            const profits = ['daily-profit', 'total-profit'];
+            profits.forEach(id => {
+                const element = document.getElementById(id);
+                const current = parseInt(element.textContent.replace('+$', '').replace('$', '').replace(',', ''));
+                element.textContent = (id === 'daily-profit' ? '+$' : '$') + (current + Math.floor(Math.random() * 10)).toLocaleString();
+            });
+        }, 5000);
+
+        // بدء التشغيل التلقائي
+        window.onload = function() {
+            setTimeout(() => {
+                startHunter();
+                startAnalyst();
+            }, 2000);
+            
+            setTimeout(() => {
+                startNegotiator();
+                startMarketer();
+            }, 4000);
+        };
+    </script>
+</body>
+</html>
