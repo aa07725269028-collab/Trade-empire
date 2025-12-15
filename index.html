@@ -275,29 +275,40 @@ function switchToRegister() {
     }, 100);
 }
         
-        async function registerUser() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!email || !password) {
-                showErrorMessage("⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور");
-                return;
-            }
-            
-            if (password.length < 6) {
-                showErrorMessage("⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل");
-                return;
-            }
-            
-            try {
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                showSuccessMessage("🎉 تم إنشاء الحساب بنجاح! البيانات تم حفظها في السحابة.");
-                toggleLogin();
-            } catch (error) {
-                console.error("❌ خطأ في إنشاء الحساب:", error);
-                showErrorMessage("❌ خطأ: " + error.message);
-            }
-        }
+       async function registerUser() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // تأكد من إدخال بيانات
+    if (!email || !password) {
+        alert("⚠️ أدخل إيميل وكلمة مرور");
+        return;
+    }
+    
+    try {
+        // 1. أنشئ الحساب في Firebase
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        
+        // 2. احفظ بياناتك في Firestore
+        await db.collection('users').doc(userCredential.user.uid).set({
+            email: email,
+            totalProfit: 18542,
+            dailyProfit: 847,
+            walletBalance: 12542,
+            created: new Date()
+        });
+        
+        // 3. أظهر رسالة نجاح
+        alert("🎉 تم إنشاء حسابك! البيانات محفوظة في السحابة");
+        
+        // 4. أغلق نافذة التسجيل
+        document.getElementById('loginModal').classList.add('hidden');
+        
+    } catch (error) {
+        // 5. إذا حدث خطأ، أظهر رسالة بسيطة
+        alert("❌ خطأ: " + error.message);
+    }
+}
         
         async function logoutUser() {
             try {
